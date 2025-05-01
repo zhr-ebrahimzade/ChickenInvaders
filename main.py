@@ -3,12 +3,16 @@ import pygame
 
 pygame.init()
 
+
+# 1. READ ABOUT PYTHON DATACLASSES AND MOVE THESE INTO A DATACLASS
+# 2. CREATE A PYTHON FILE CONTAINING THE WINDOW CLASS AND USE IT IN UR MAIN SCRIPT
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 600
 
 SPACE_WIDTH = 500
 SPACE_HEIGHT = 600
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+# args must be separated with commas
 space_surface= pygame.display.set_mode((SPACE_WIDTH,SPACE_HEIGHT))
 
 clock=pygame.time.Clock()
@@ -16,6 +20,7 @@ clock=pygame.time.Clock()
 # Load GIF frames
 frames = []
 for i in range(1,75): 
+    # 3. change this so it can be run from any computer
     frames.append(pygame.image.load(f"D:\\MyProjects\\chickenInvaders\\imgs\\frames_space\\{i}.gif"))
 
 frame_index = 0
@@ -39,6 +44,8 @@ surface_img = pygame.image.load("D:\\MyProjects\\chickenInvaders\\imgs\\astronau
 surface_img_rect = surface_img.get_rect()
 surface_img_rect.topleft=(0,0)
 
+# USE SPACE BETWEEN VARNAME AND VARVALUE
+# CREATE AN "ENTITIES" DIRECTORY. MOVE ALL IN GAME OBJECTS INTO SAID DIR.
 ROCKET_SIZE=(60,80)
 spaceShip_img=pygame.image.load("D:\\MyProjects\\chickenInvaders\\imgs\\rocket-7339372_1280.png")
 spaceShip_img=pygame.transform.scale(spaceShip_img,ROCKET_SIZE)
@@ -52,6 +59,7 @@ print(f"Rect after positioning: {spaceShip_img_rect}")
 
 running = True
 window=False
+# REDUNDANT PARENTHESIS
 while (running):
     for event in pygame.event.get():
         # print(event)
