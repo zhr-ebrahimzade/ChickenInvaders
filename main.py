@@ -15,7 +15,7 @@ clock=pygame.time.Clock()
 
 # Load GIF frames
 frames = []
-for i in range(1,75):  # Assuming you have 5 frames like "frame1.png", "frame2.png", etc.
+for i in range(1,75): 
     frames.append(pygame.image.load(f"D:\\MyProjects\\chickenInvaders\\imgs\\frames_space\\{i}.gif"))
 
 frame_index = 0
