@@ -16,29 +16,18 @@ clock = pygame.time.Clock()
 # Load GIF frames
 frames = []
 for i in range(1, 75):
-    # 3. change this so it can be run from any computer
-    frames.append(pygame.image.load(f".\\imgs\\frames_space\\{i}.gif"))
+    frames.append(pygame.image.load(f".\\media\\imgs\\frames_space\\{i}.gif"))
 frame_index = 0
 
-# defining colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 255, 0)
-CYAN = (0, 255, 255)
-MAGENTA = (255, 0, 255)
-
 # creating Images
-surface_img = pygame.image.load(".\\imgs\\astronaut.jpg")
+surface_img = pygame.image.load(".\\media\\imgs\\astronaut.jpg")
 surface_img_rect = surface_img.get_rect()
 surface_img_rect.topleft = (0, 0)
 
 # USE SPACE BETWEEN VARNAME AND VARVALUE
 # CREATE AN "ENTITIES" DIRECTORY. MOVE ALL IN GAME OBJECTS INTO SAID DIR.
 ROCKET_SIZE = (60, 80)
-space_ship_img = pygame.image.load(".\\imgs\\rocket-7339372_1280.png")
+space_ship_img = pygame.image.load(".\\media\\imgs\\rocket-7339372_1280.png")
 space_ship_img = pygame.transform.scale(space_ship_img, ROCKET_SIZE)
 space_ship_img_rect = space_ship_img.get_rect()
 space_ship_img_rect.centerx = window_surface.width // 2  # Center horizontally
