@@ -1,26 +1,23 @@
 import pygame
+from Window import Window
 
 pygame.init()
 
-# 1. READ ABOUT PYTHON DATACLASSES AND MOVE THESE INTO A DATACLASS
 # 2. CREATE A PYTHON FILE CONTAINING THE WINDOW CLASS AND USE IT IN UR MAIN SCRIPT
-WINDOW_WIDTH = 500
-WINDOW_HEIGHT = 600
-SPACE_WIDTH = 500
-SPACE_HEIGHT = 600
-display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-# args must be separated with commas
-space_surface = pygame.display.set_mode((SPACE_WIDTH, SPACE_HEIGHT))
+
+window_surface = Window(500, 600, "Welcome to Chicken Invaders")
+
+display_surface = pygame.display.set_mode((window_surface.width, window_surface.height))
+
+space_surface = pygame.display.set_mode((window_surface.width, window_surface.height))
 
 clock = pygame.time.Clock()
 
 # Load GIF frames
 frames = []
-
 for i in range(1, 75):
     # 3. change this so it can be run from any computer
     frames.append(pygame.image.load(f".\\imgs\\frames_space\\{i}.gif"))
-
 frame_index = 0
 
 # defining colors
@@ -33,8 +30,6 @@ YELLOW = (255, 255, 0)
 CYAN = (0, 255, 255)
 MAGENTA = (255, 0, 255)
 
-pygame.display.set_caption("Welcome to Chicken Invaders")
-
 # creating Images
 surface_img = pygame.image.load(".\\imgs\\astronaut.jpg")
 surface_img_rect = surface_img.get_rect()
@@ -46,18 +41,19 @@ ROCKET_SIZE = (60, 80)
 space_ship_img = pygame.image.load(".\\imgs\\rocket-7339372_1280.png")
 space_ship_img = pygame.transform.scale(space_ship_img, ROCKET_SIZE)
 space_ship_img_rect = space_ship_img.get_rect()
-space_ship_img_rect.centerx = SPACE_WIDTH // 2  # Center horizontally
-space_ship_img_rect.bottom = SPACE_HEIGHT  # Place at the bottom
+space_ship_img_rect.centerx = window_surface.width // 2  # Center horizontally
+space_ship_img_rect.bottom = window_surface.height  # Place at the bottom
 
 print(f"Rect before scaling: {space_ship_img.get_rect()}")
 print(f"Rect after positioning: {space_ship_img_rect}")
 
 running = True
 window = False
-# REDUNDANT PARENTHESIS
+
+
 while running:
     for event in pygame.event.get():
-        # print(event)
+        pygame.display.set_caption(window_surface.title)
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYUP or event.type == pygame.K_SPACE:
