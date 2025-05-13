@@ -1,15 +1,16 @@
 import pygame
-from Window import Window
+from WindowDataClass import WindowDataClass
+from Window import Windows
 
 pygame.init()
 
 # 2. CREATE A PYTHON FILE CONTAINING THE WINDOW CLASS AND USE IT IN UR MAIN SCRIPT
 
-window_surface = Window(500, 600, "Welcome to Chicken Invaders")
+main_surface_dataclass = WindowDataClass(500, 600, "Welcome to Chicken Invaders", ".\\media\\imgs\\astronaut.jpg",
+                                         (0, 0))
+game_surface_dataclass = WindowDataClass(500, 600)
 
-display_surface = pygame.display.set_mode((window_surface.width, window_surface.height))
-
-space_surface = pygame.display.set_mode((window_surface.width, window_surface.height))
+space_surface = pygame.display.set_mode((500, 600))
 
 clock = pygame.time.Clock()
 
@@ -19,19 +20,14 @@ for i in range(1, 75):
     frames.append(pygame.image.load(f".\\media\\imgs\\frames_space\\{i}.gif"))
 frame_index = 0
 
-# creating Images
-surface_img = pygame.image.load(".\\media\\imgs\\astronaut.jpg")
-surface_img_rect = surface_img.get_rect()
-surface_img_rect.topleft = (0, 0)
-
 # USE SPACE BETWEEN VARNAME AND VARVALUE
 # CREATE AN "ENTITIES" DIRECTORY. MOVE ALL IN GAME OBJECTS INTO SAID DIR.
 ROCKET_SIZE = (60, 80)
 space_ship_img = pygame.image.load(".\\media\\imgs\\rocket-7339372_1280.png")
 space_ship_img = pygame.transform.scale(space_ship_img, ROCKET_SIZE)
 space_ship_img_rect = space_ship_img.get_rect()
-space_ship_img_rect.centerx = window_surface.width // 2  # Center horizontally
-space_ship_img_rect.bottom = window_surface.height  # Place at the bottom
+space_ship_img_rect.centerx = game_surface_dataclass.width // 2  # Center horizontally
+space_ship_img_rect.bottom = game_surface_dataclass.height  # Place at the bottom
 
 print(f"Rect before scaling: {space_ship_img.get_rect()}")
 print(f"Rect after positioning: {space_ship_img_rect}")
@@ -39,16 +35,18 @@ print(f"Rect after positioning: {space_ship_img_rect}")
 running = True
 window = False
 
+main_surface = Windows(main_surface_dataclass)
+main_surface.new_window()
 
 while running:
     for event in pygame.event.get():
-        pygame.display.set_caption(window_surface.title)
+        pygame.display.set_caption(main_surface_dataclass.title)
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYUP or event.type == pygame.K_SPACE:
             window = True
     if not window:
-        display_surface.blit(surface_img, surface_img_rect)
+        main_surface.blitting()
 
     if window:
         # Display current frame
