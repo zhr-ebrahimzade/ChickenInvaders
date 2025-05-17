@@ -32,6 +32,10 @@ space_ship_img_rect.bottom = game_surface_dataclass.height  # Place at the botto
 print(f"Rect before scaling: {space_ship_img.get_rect()}")
 print(f"Rect after positioning: {space_ship_img_rect}")
 
+# Moving the spaceship
+
+player_pos = game_surface_dataclass
+
 running = True
 window = False
 
@@ -43,7 +47,7 @@ while running:
         pygame.display.set_caption(main_surface_dataclass.title)
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYUP or event.type == pygame.K_SPACE:
+        if event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
             window = True
     if not window:
         main_surface.blitting()
@@ -56,6 +60,17 @@ while running:
         # Adjust speed (higher = slower animation)
         clock.tick(10)
         space_surface.blit(space_ship_img, space_ship_img_rect)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+            space_surface.blit(frames[frame_index], (0, 0))
+
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_RIGHT]:
+                space_ship_img_rect = space_ship_img_rect.move((2, 0))
+            space_surface.blit(space_ship_img, space_ship_img_rect)
 
     # updating the display
     pygame.display.flip()
