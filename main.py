@@ -53,24 +53,32 @@ while running:
         main_surface.blitting()
 
     if window:
-        # Display current frame
-        space_surface.blit(frames[frame_index], (0, 0))
-        # updating frame index
-        frame_index = (frame_index + 1) % len(frames)
-        # Adjust speed (higher = slower animation)
-        clock.tick(10)
+        space_surface.fill((0, 0, 0))
+        # # Display current frame
+        # space_surface.blit(frames[frame_index], (0, 0))
+        # # updating frame index
+        # frame_index = (frame_index + 1) % len(frames)
+        # # Adjust speed (higher = slower animation)
+        # clock.tick(10)
         space_surface.blit(space_ship_img, space_ship_img_rect)
-
+        keys = pygame.key.get_pressed()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-            space_surface.blit(frames[frame_index], (0, 0))
-
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_RIGHT]:
-                space_ship_img_rect = space_ship_img_rect.move((2, 0))
-            space_surface.blit(space_ship_img, space_ship_img_rect)
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RIGHT]:
+            space_ship_img_rect.x += 1
+        if keys[pygame.K_LEFT]:
+            space_ship_img_rect.x -= 1
+        if keys[pygame.K_UP]:
+            space_ship_img_rect.y -= 1
+        if keys[pygame.K_DOWN]:
+            space_ship_img_rect.y += 1
+        space_ship_img_rect.clamp_ip(space_surface.get_rect())  # ensure player is inside screen
+        space_surface.fill((0, 0, 0))
+        space_surface.blit(space_ship_img, space_ship_img_rect)
+        clock.tick(60)
 
     # updating the display
     pygame.display.flip()
